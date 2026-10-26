@@ -1,0 +1,43 @@
+# Status checks for this PHP demo app. Ends in the "Status checks passed" job
+# that the privacybydesign org ruleset requires before a PR can merge.
+name: Status checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  php:
+    name: php lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint PHP sources
+        run: |
+          php --version
+          find app -name '*.php' -print0 | xargs -0 -t -n1 php -l
+
+  # Single required check for the ruleset: the job names above can change
+  # without touching the org ruleset.
+  passed:
+    name: Status checks passed
+    if: always()
+    needs: [php]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: All required jobs succeeded
+        env:
+          RESULTS: ${{ toJSON(needs.*.result) }}
+        run: |
+          echo "$RESULTS"
+          if grep -qE '"(failure|cancelled)"' <<< "$RESULTS"; then exit 1; fi
