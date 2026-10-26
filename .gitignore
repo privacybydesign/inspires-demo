@@ -1,0 +1,4 @@
+# Generated locally by ca/gen-certs.sh (or gen-key4.py). Never commit keys.
+ca/*.key
+ca/*.pem
+ca/*.srl

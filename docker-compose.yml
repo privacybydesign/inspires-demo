@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        PHP_TAG: ${PHP_TAG:-8.4.1-apache}
+    ports:
+      - "8080:80"
+    environment:
+      CANARY_URL: "https://tls-canary:8443/"
+    depends_on:
+      - tls-canary
+
+  # Local stand-in for a host whose cert chains to the distrusted CA.
+  # Lets the eMudhra check run fully offline — nothing leaves the laptop.
+  tls-canary:
+    build: ./tls-canary
+    expose:
+      - "8443"
+    volumes:
+      - ./ca:/ca:ro
