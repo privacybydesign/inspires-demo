@@ -1,11 +1,11 @@
 services:
   app:
+    # The PHP version lives in one place: the PHP_TAG default in the Dockerfile.
+    # Passing it as a build arg here would override that default and hide the fix.
     build:
       context: .
-      args:
-        PHP_TAG: ${PHP_TAG:-8.4.1-apache}
     ports:
-      - "8080:80"
+      - "${APP_PORT:-8080}:80"
     environment:
       CANARY_URL: "https://tls-canary:8443/"
     depends_on:

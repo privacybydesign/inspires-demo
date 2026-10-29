@@ -41,6 +41,7 @@ cd ca
 cd ..
 docker compose up -d --build
 open http://localhost:8080/
+# poort bezet? APP_PORT=8765 docker compose up -d --build
 ```
 
 `/health` toont dan twee rode lampjes. Dat is de beginstand voor de demo.
