@@ -5,7 +5,7 @@
 # patched" and "patched" numbers on the slides are 8.4.x / 8.5.x; use whatever
 # real patch tags exist at build time. The /health check reads the REAL running
 # version, so the lamp follows the base image honestly.
-ARG PHP_TAG=8.4.1-apache
+ARG PHP_TAG=8.4.27-apache
 FROM php:${PHP_TAG}
 
 # Quiet the version-leak header (cosmetic; not the demo's point).
