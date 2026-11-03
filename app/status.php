@@ -61,17 +61,21 @@ function check_emudhra(): array
 
     if ($verify_failed) {
         $ok = true;
+        $tls = 'rejected';
         $detail = 'certificate correctly rejected';
     } elseif ($accepted) {
         $ok = false;
+        $tls = 'accepted';
         $detail = 'TLS verified against a distrusted CA — bundle still trusts eMudhra G3';
     } else {
         $ok = false;
+        $tls = 'unreachable';
         $detail = "canary unreachable (curl $errno: $err) — check the demo setup";
     }
 
     return [
         'ok'     => $ok,
+        'tls'    => $tls,
         'bundle' => CA_BUNDLE,
         'canary' => CANARY_URL,
         'detail' => $detail,

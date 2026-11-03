@@ -22,7 +22,7 @@ misconfiguraties en de fix haalt ze weg.
 
 | Map | Wat |
 |-----|-----|
-| `app/` | De PHP-demo-app: landingspagina + `/health` met de twee lampjes |
+| `app/` | De PHP-demo-app: een zelfgebouwde bitcoin-wallet met 12 BTC (alleen de voetregel verraadt de twee lekken) + `/health.php` met de twee lampjes |
 | `ca/` | Scripts die de stand-in "foute CA" + het testcert maken |
 | `tls-canary/` | Lokaal HTTPS-servertje dat een cert uit die foute CA presenteert |
 | `watcher/` | Lokale "deploy": ziet een merge op `main`, herbouwt en herstart |
