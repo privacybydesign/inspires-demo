@@ -5,7 +5,7 @@
 // VULNERABLE: an outdated bundle that still trusts the distrusted CA.
 // FIX (issue #2): point this at the system trust store, e.g.
 //   '/etc/ssl/certs/ca-certificates.crt'
-define('CA_BUNDLE', '/etc/ssl/certs/ca-certificates.crt');
+define('CA_BUNDLE', __DIR__ . '/../ca/bundle-outdated.pem');
 
 // The local TLS canary that presents a cert from the (distrusted) CA.
 // Reachable name inside docker-compose is 'tls-canary'; 'localhost' when bare.
